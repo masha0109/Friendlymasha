@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog & Affiliate Partners</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --text-dark: #0f172a;
+            --text-light: #475569;
+            --bg-light: #f1f5f9;
+            --border: #e2e8f0;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(to bottom right, #f8fafc, #f8fafc, #f0f9ff);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+        }
+
+        nav .container {
+            max-width: 80rem;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--text-dark), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        nav a {
+            margin-left: 2rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--text-dark);
+        }
+
+        .container {
+            max-width: 80rem;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 5rem 1.5rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.75rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-light);
+            max-width: 42rem;
+            margin: 0 auto;
+        }
+
+        /* Blog Section */
+        .blog-section {
+            padding: 4rem 1.5rem;
+        }
+
+        .section-title {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 2rem;
+        }
+
+        /* Category Filter */
+        .category-filter {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-bottom: 3rem;
+        }
+
+        .category-btn {
+            padding: 0.5rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: var(--bg-light);
+            color: var(--text-light);
+        }
+
+        .category-btn.active {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 20px 25px -5px rgba(37, 99, 235, 0.3);
+        }
+
+        .category-btn:hover:not(.active) {
+            background: #e2e8f0;
+        }
+
+        /* Blog Grid */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .blog-card {
+            background: var(--white);
+            border-radius: 0.75rem;
+            border: 1px solid var(--border);
+            padding: 2rem;
+            transition: all 0.3s;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            animation: slideUp 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        .blog-card:nth-child(1) { animation-delay: 0s; }
+        .blog-card:nth-child(2) { animation-delay: 0.1s; }
+        .blog-card:nth-child(3) { animation-delay: 0.2s; }
+        .blog-card:nth-child(4) { animation-delay: 0.3s; }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .blog-card:hover {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            border-color: #93c5fd;
+        }
+
+        .blog-icon {
+            font-size: 2.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .blog-meta {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .blog-category {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--primary);
+            background: #dbeafe;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+        }
+
+        .blog-date {
+            font-size: 0.875rem;
+            color: var(--text-light);
+        }
+
+        .blog-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.75rem;
+            transition: color 0.3s;
+        }
+
+        .blog-card:hover h3 {
+            color: var(--primary);
+        }
+
+        .blog-excerpt {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .read-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+            transition: gap 0.3s;
+        }
+
+        .read-more:hover {
+            gap: 0.75rem;
+        }
+
+        .arrow {
+            display: inline-block;
+            transition: transform 0.3s;
+        }
+
+        .read-more:hover .arrow {
+            transform: translateX(4px);
+        }
+
+        /* Affiliates Section */
+        .affiliates-section {
+            background: var(--white);
+            border-top: 1px solid var(--border);
+            padding: 5rem 1.5rem;
+        }
+
+        .affiliates-intro {
+            margin-bottom: 4rem;
+        }
+
+        .affiliates-intro p {
+            font-size: 1.125rem;
+            color: var(--text-light);
+        }
+
+        .affiliates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .affiliate-card {
+            position: relative;
+            background: linear-gradient(135deg, #f8fafc 0%, var(--white) 100%);
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+            padding: 2rem;
+            transition: all 0.3s;
+            animation: slideUp 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        .affiliate-card:nth-child(1) { animation-delay: 0.3s; }
+        .affiliate-card:nth-child(2) { animation-delay: 0.38s; }
+        .affiliate-card:nth-child(3) { animation-delay: 0.46s; }
+        .affiliate-card:nth-child(4) { animation-delay: 0.54s; }
+        .affiliate-card:nth-child(5) { animation-delay: 0.62s; }
+        .affiliate-card:nth-child(6) { animation-delay: 0.7s; }
+
+        .affiliate-card:hover {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            border-color: #93c5fd;
+        }
+
+        .affiliate-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: white;
+            background: linear-gradient(135deg, var(--primary), #1e40af);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+        }
+
+        .affiliate-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .affiliate-description {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .affiliate-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .commission-info {
+            flex: 1;
+        }
+
+        .commission-label {
+            font-size: 0.875rem;
+            color: var(--text-light);
+        }
+
+        .commission-rate {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .affiliate-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--primary);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.875rem;
+            transition: background 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .affiliate-link:hover {
+            background: var(--primary-dark);
+        }
+
+        .external-icon {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Footer */
+        footer {
+            background: #0f172a;
+            color: #94a3b8;
+            padding: 3rem 1.5rem;
+            text-align: center;
+            border-top: 1px solid #1e293b;
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        footer .footer-disclosure {
+            font-size: 0.875rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.25rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.875rem;
+            }
+
+            nav .container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav a {
+                margin-left: 0;
+                margin-right: 2rem;
+            }
+
+            .blog-grid,
+            .affiliates-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">Catalyst</div>
+            <div>
+                <a href="#blog">Blog</a>
+                <a href="#affiliates">Affiliates</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Ideas Worth Exploring</h1>
+            <p>Insights on digital transformation, growth strategies, and the tools that power modern businesses.</p>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="blog-section" id="blog">
+        <div class="container">
+            <h2 class="section-title">Latest Articles</h2>
+
+            <!-- Category Filter -->
+            <div class="category-filter" id="categoryFilter"></div>
+
+            <!-- Blog Grid -->
+            <div class="blog-grid" id="blogGrid"></div>
+        </div>
+    </section>
+
+    <!-- Affiliates Section -->
+    <section class="affiliates-section" id="affiliates">
+        <div class="container">
+            <div class="affiliates-intro">
+                <h2 class="section-title">Affiliate Partners</h2>
+                <p>Tools and services I personally use and recommend. I earn a commission when you sign up.</p>
+            </div>
+
+            <!-- Affiliates Grid -->
+            <div class="affiliates-grid" id="affiliatesGrid"></div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2024 Your Blog Name. All rights reserved.</p>
+        <p class="footer-disclosure">Affiliate disclosures: I earn commissions from products I recommend.</p>
+    </footer>
+
+    <script>
+        // Blog data
+        const blogPosts = [
+            {
+                id: 1,
+                title: "The Future of Digital Marketing",
+                excerpt: "Exploring emerging trends and technologies shaping the marketing landscape in 2024.",
+                category: "marketing",
+                date: "March 5, 2024",
+                image: "🚀"
+            },
+            {
+                id: 2,
+                title: "Building Better User Experiences",
+                excerpt: "Best practices for creating interfaces that users actually want to use.",
+                category: "design",
+                date: "February 28, 2024",
+                image: "✨"
+            },
+            {
+                id: 3,
+                title: "Scaling Your SaaS Product",
+                excerpt: "Strategies for sustainable growth from startup to enterprise.",
+                category: "business",
+                date: "February 20, 2024",
+                image: "📈"
+            },
+            {
+                id: 4,
+                title: "AI Tools That Actually Matter",
+                excerpt: "A curated guide to AI applications that are delivering real value.",
+                category: "technology",
+                date: "February 10, 2024",
+                image: "🤖"
+            }
+        ];
+
+        // Affiliates data
+        const affiliates = [
+            {
+                name: "TechHub Pro",
+                description: "Premium tools for digital creators",
+                commission: "15%",
+                badge: "Featured"
+            },
+            {
+                name: "Design Suite",
+                description: "All-in-one design and prototyping platform",
+                commission: "20%",
+                badge: null
+            },
+            {
+                name: "Growth Analytics",
+                description: "Advanced analytics and insights platform",
+                commission: "18%",
+                badge: null
+            },
+            {
+                name: "Content Engine",
+                description: "AI-powered content creation tools",
+                commission: "12%",
+                badge: "New"
+            },
+            {
+                name: "Marketing Automation",
+                description: "Complete marketing workflow solution",
+                commission: "25%",
+                badge: null
+            },
+            {
+                name: "Developer Tools",
+                description: "Essential tools for modern developers",
+                commission: "10%",
+                badge: null
+            }
+        ];
+
+        let activeCategory = 'all';
+
+        // Initialize
+        function init() {
+            renderCategories();
+            renderBlogPosts();
+            renderAffiliates();
+        }
+
+        // Render categories
+        function renderCategories() {
+            const filterContainer = document.getElementById('categoryFilter');
+            const categories = ['all', 'marketing', 'design', 'business', 'technology'];
+
+            categories.forEach(cat => {
+                const button = document.createElement('button');
+                button.className = `category-btn ${cat === 'all' ? 'active' : ''}`;
+                button.textContent = cat.charAt(0).toUpperCase() + cat.slice(1);
+                button.onclick = () => filterBlog(cat);
+                filterContainer.appendChild(button);
+            });
+        }
+
+        // Filter blog posts
+        function filterBlog(category) {
+            activeCategory = category;
+
+            // Update active button
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Re-render blog posts
+            renderBlogPosts();
+        }
+
+        // Render blog posts
+        function renderBlogPosts() {
+            const grid = document.getElementById('blogGrid');
+            grid.innerHTML = '';
+
+            const filtered = activeCategory === 'all'
+                ? blogPosts
+                : blogPosts.filter(post => post.category === activeCategory);
+
+            filtered.forEach(post => {
+                const card = document.createElement('article');
+                card.className = 'blog-card';
+                card.innerHTML = `
+                    <div class="blog-icon">${post.image}</div>
+                    <div class="blog-meta">
+                        <span class="blog-category">${post.category.toUpperCase()}</span>
+                        <span class="blog-date">${post.date}</span>
+                    </div>
+                    <h3>${post.title}</h3>
+                    <p class="blog-excerpt">${post.excerpt}</p>
+                    <a href="#" class="read-more">
+                        Read More <span class="arrow">→</span>
+                    </a>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Render affiliates
+        function renderAffiliates() {
+            const grid = document.getElementById('affiliatesGrid');
+            grid.innerHTML = '';
+
+            affiliates.forEach(affiliate => {
+                const card = document.createElement('div');
+                card.className = 'affiliate-card';
+                card.innerHTML = `
+                    ${affiliate.badge ? `<div class="affiliate-badge">${affiliate.badge}</div>` : ''}
+                    <h3>${affiliate.name}</h3>
+                    <p class="affiliate-description">${affiliate.description}</p>
+                    <div class="affiliate-footer">
+                        <div class="commission-info">
+                            <p class="commission-label">Commission</p>
+                            <p class="commission-rate">${affiliate.commission}</p>
+                        </div>
+                        <a href="#" class="affiliate-link">
+                            Visit <span class="external-icon">↗</span>
+                        </a>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Start
+        init();
+    </script>
+</body>
+</html>
